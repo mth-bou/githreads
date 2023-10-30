@@ -12,7 +12,7 @@ type PostProps = {
 const Post = ({ post }: PostProps) => {
     return (
         <PostLayout user={post.user} postId={post.id} createdAt={post.createdAt}>
-            <Link href={`/post/${post.id}`} className="text-sm text-foreground">
+            <Link href={`/posts/${post.id}`} className="text-sm text-foreground">
                 {post.content}
             </Link>
             <div className="flex gap-2 items-center">
