@@ -1,4 +1,3 @@
-
 import {getAuthSession} from "@/lib/auth";
 import {prisma} from '@/lib/prisma';
 import {Prisma} from "@prisma/client";
