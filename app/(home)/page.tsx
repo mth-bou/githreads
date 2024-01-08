@@ -7,7 +7,7 @@ import Post from "@/src/features/post/Post";
 const Home = async () => {
     const session = await getAuthSession();
 
-    const posts = await getLatestPosts();
+    const posts = await getLatestPosts(session?.user.id);
 
     // @ts-ignore
     return (
