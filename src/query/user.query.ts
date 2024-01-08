@@ -1,6 +1,18 @@
 
 import {getAuthSession} from "@/lib/auth";
 import {prisma} from '@/lib/prisma';
+import {Prisma} from "@prisma/client";
+import {postSelectQuery} from "@/src/query/post.query";
+
+const userQuery = {
+    id: true,
+    name: true,
+    username: true,
+    image: true,
+    bio: true,
+    createdAt: true,
+    link: true
+} satisfies Prisma.UserSelect;
 
 export const getUser = async () => {
     const session = await getAuthSession();
@@ -13,7 +25,50 @@ export const getUser = async () => {
         where: {
             id: session.user.id
         }
-    })
+    });
 
     return user;
 }
+
+export const getUserProfile = async (userId: string) => {
+    return prisma.user.findUnique({
+        where: {
+            id: userId
+        },
+        select: {
+            ...userQuery,
+            _count: {
+                select: {
+                    followeds: true,
+                    likes: true
+                },
+            },
+            posts: {
+                select: postSelectQuery(userId),
+                take: 10,
+                orderBy: {
+                    createdAt: "desc"
+                },
+            },
+            followeds: {
+                select: {
+                    follower: {
+                        select: {
+                            id: true,
+                            image: true,
+                            username: true
+                        }
+                    }
+                },
+                take: 3,
+                orderBy: {
+                    createdAt: "desc"
+                }
+            }
+        }
+    });
+}
+
+export type UserProfile = NonNullable<
+    Prisma.PromiseReturnType<typeof getUserProfile>
+>;
