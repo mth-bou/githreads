@@ -18,6 +18,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 This project is a replica of the Githreads social network for developers and is built with React and Next.js.
 
+You can use SQLite or other database provider to connect your app.
+
+I used postgreSQL on [neon.tech](https://neon.tech) and [vercel](https://vercel.com) for deployment : you can check a demo following this url : [https://githreads-mthb.vercel.app/](https://githreads-mthb.vercel.app/)
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
