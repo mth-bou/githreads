@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { UserEdit } from "@/src/query/user.query";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
 
@@ -54,6 +55,7 @@ export const ProfileForm = ({ onSubmit, user }: ProfileFormProps) => {
 
                 if (url) {
                     router.push(url);
+                    window.location.href = url;
                     router.refresh();
                 }
             }}
