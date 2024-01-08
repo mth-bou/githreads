@@ -9,6 +9,11 @@ import {followUser} from "@/app/users/[userId]/follow.action";
 import Post from "@/src/features/post/Post";
 import {Metadata} from "next";
 
+type PageParams = {
+    params: {
+        userId: string;
+    }
+}
 export const generateMetadata = async ({params}: PageParams): Promise<Metadata> => {
     const user = await getUserProfile(params.userId);
 
@@ -19,17 +24,7 @@ export const generateMetadata = async ({params}: PageParams): Promise<Metadata> 
     })
 }
 
-type PageParams = {
-    params: {
-        userId: string;
-    }
-}
-
-const UserPage = async ({ params }: {
-    params: {
-        userId: string
-    }
-}) => {
+const UserPage = async ({ params }: PageParams) => {
     const session = await getAuthSession();
     const user = await getUserProfile(params.userId)
 
