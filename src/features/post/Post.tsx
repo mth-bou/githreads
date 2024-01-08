@@ -4,6 +4,7 @@ import { PostLayout } from "@/src/features/post/PostLayout";
 import Link from "next/link";
 import {Button, buttonVariants} from "@/components/ui/button";
 import {Heart, MessageCircle} from "lucide-react";
+import LikeButton from "@/src/features/post/LikeButton";
 
 type PostProps = {
     post: PostHome
@@ -16,9 +17,7 @@ const Post = ({ post }: PostProps) => {
                 {post.content}
             </Link>
             <div className="flex gap-2 items-center">
-                <Button size="icon" variant="ghost">
-                    <Heart size={20} />
-                </Button>
+                <LikeButton postId={post.id} isLiked={post.likes.length > 0} />
                 <Link href={`/posts/${post.id}/reply`} className={buttonVariants({variant: "ghost", size: "icon"})}>
                     <MessageCircle size={20} />
                 </Link>
